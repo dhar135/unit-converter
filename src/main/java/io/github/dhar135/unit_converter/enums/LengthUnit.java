@@ -1,5 +1,10 @@
 package io.github.dhar135.unit_converter.enums;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum LengthUnit {
     MILLIMETER("mm", .001),
     CENTIMETER("cm", .01),
@@ -13,7 +18,25 @@ public enum LengthUnit {
     private final String symbol;
     private final double conversionFactorToMeter;
 
-    private LengthUnit(String symbol,  double conversionFactorToMeter) {
+    // --- Optimization Start ---
+    private static final Map<String, LengthUnit> SYMBOL_TO_UNIT_MAP;
+
+    static {
+        // Initialize map once, using lowercase symbols for case-insensitive lookup
+        SYMBOL_TO_UNIT_MAP = Stream.of(values())
+                .collect(Collectors.toMap(unit -> unit.getSymbol().toLowerCase(), Function.identity()));
+    }
+
+    public static LengthUnit fromSymbol(String symbol) {
+        LengthUnit unit = SYMBOL_TO_UNIT_MAP.get(symbol.toLowerCase()); // Lookup in map (case-insensitive)
+        if (unit == null) {
+            throw new IllegalArgumentException("Invalid length unit symbol: " + symbol);
+        }
+        return unit;
+    }
+    // --- Optimization End ---
+
+    LengthUnit(String symbol, double conversionFactorToMeter) {
         this.symbol = symbol;
         this.conversionFactorToMeter = conversionFactorToMeter;
     }
