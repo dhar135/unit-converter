@@ -30,7 +30,7 @@ public enum TempUnit {
     }
     // --- Optimization End ---
 
-    private TempUnit(String symbol) {
+    TempUnit(String symbol) {
         this.symbol = symbol;
     }
 

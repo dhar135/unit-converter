@@ -33,7 +33,7 @@ public enum WeightUnit {
     }
     // --- Optimization End ---
 
-    private WeightUnit(String symbol, double conversionFactorToGram) {
+    WeightUnit(String symbol, double conversionFactorToGram) {
         this.symbol = symbol;
         this.conversionFactorToGram = conversionFactorToGram;
     }

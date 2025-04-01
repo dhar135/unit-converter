@@ -36,7 +36,7 @@ public enum LengthUnit {
     }
     // --- Optimization End ---
 
-    private LengthUnit(String symbol,  double conversionFactorToMeter) {
+    LengthUnit(String symbol, double conversionFactorToMeter) {
         this.symbol = symbol;
         this.conversionFactorToMeter = conversionFactorToMeter;
     }
