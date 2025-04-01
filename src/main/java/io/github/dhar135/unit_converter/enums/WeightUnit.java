@@ -27,7 +27,7 @@ public enum WeightUnit {
     public static WeightUnit fromSymbol(String symbol) {
         WeightUnit unit = SYMBOL_TO_UNIT_MAP.get(symbol.toLowerCase()); // Lookup in map (case-insensitive)
         if (unit == null) {
-            throw new IllegalArgumentException("Invalid length unit symbol: " + symbol);
+            throw new IllegalArgumentException("Invalid weight unit symbol: " + symbol);
         }
         return unit;
     }
