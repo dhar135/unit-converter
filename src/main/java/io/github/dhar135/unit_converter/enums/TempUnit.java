@@ -24,7 +24,7 @@ public enum TempUnit {
     public static TempUnit fromSymbol(String symbol) {
         TempUnit unit = SYMBOL_TO_UNIT_MAP.get(symbol.toLowerCase()); // Lookup in map (case-insensitive)
         if (unit == null) {
-            throw new IllegalArgumentException("Invalid length unit symbol: " + symbol);
+            throw new IllegalArgumentException("Invalid temperature unit symbol: " + symbol);
         }
         return unit;
     }
