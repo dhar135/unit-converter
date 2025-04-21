@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="container mx-auto p-4">
+    <div class="text-center mb-6">
+        <h1 class="text-3xl">Length Converter</h1>
+        <p>Convert between meters, kilometers, miles, etc.</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <form th:action="@{/convert-length}" method="post" class="w-full max-w-sm">
+            <div>
+                <label for="value">Value:</label>
+                <input
+                    type="number"
+                    id="value"
+                    name="value"
+                    th:value="${value != null ? value : ''}"
+                    class="border p-2 w-full bg-gray-100"
+                    required
+                    step="any"
+                />
+            </div>
+            <div class="mt-4">
+                <label for="fromUnit">Convert From:</label>
+                <select id="fromUnit" name="fromUnit" class="border p-2 w-full" required>
+                    <option value="" disabled th:selected="${fromUnit == null || fromUnit.isEmpty()}">Select unit</option>
+                    <option value="km" th:selected="${fromUnit == 'km'}">Kilometer</option>
+                    <option value="m" th:selected="${fromUnit == 'm'}">Meter</option>
+                    <option value="cm" th:selected="${fromUnit == 'cm'}">Centimeter</option>
+                    <option value="mm" th:selected="${fromUnit == 'mm'}">Millimeter</option>
+                    <option value="mi" th:selected="${fromUnit == 'mi'}">Mile</option>
+                    <option value="ft" th:selected="${fromUnit == 'ft'}">Foot</option>
+                    <option value="in" th:selected="${fromUnit == 'in'}">Inch</option>
+                    <option value="yd" th:selected="${fromUnit == 'yd'}">Yard</option>
+                </select>
+            </div>
+            <div class="mt-4">
+                <label for="toUnit">Convert To:</label>
+                <select id="toUnit" name="toUnit" class="border p-2 w-full" required>
+                    <option value="" disabled th:selected="${toUnit == null || toUnit.isEmpty()}">Select unit</option>
+                    <option value="km" th:selected="${toUnit == 'km'}">Kilometer</option>
+                    <option value="m" th:selected="${toUnit == 'm'}">Meter</option>
+                    <option value="cm" th:selected="${toUnit == 'cm'}">Centimeter</option>
+                    <option value="mm" th:selected="${toUnit == 'mm'}">Millimeter</option>
+                    <option value="mi" th:selected="${toUnit == 'mi'}">Mile</option>
+                    <option value="ft" th:selected="${toUnit == 'ft'}">Foot</option>
+                    <option value="in" th:selected="${toUnit == 'in'}">Inch</option>
+                    <option value="yd" th:selected="${toUnit == 'yd'}">Yard</option>
+                </select>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="text-white bg-gray-600 hover:bg-black border font-medium rounded-sm p-2">Submit</button>
+            </div>
+        </form>
+
+        <div th:if="${result != null}" class="mt-6 p-4 border rounded bg-gray-100">
+            <h2 class="text-2xl">Result:</h2>
+            <p th:text="${value} + ' ' + ${fromUnit} + ' is ' + ${#numbers.formatDecimal(result, 1, 'COMMA', 4, 'POINT')} + ' ' + ${toUnit}"></p>
+        </div>
+
+        <div class="mt-6">
+            <a href="/" class="text-blue-500 hover:underline">
+                <p>Back to Home</p>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
